@@ -8,7 +8,7 @@ int doo(int w,int wt[],int val[],int n){
 			if(i==0 || j==0){
 				dp[i][j]=0;
 			}
-			else if(w<wt[i-1]){
+			else if(j<wt[i-1]){
 				dp[i][j]=dp[i-1][j];
 			}
 			else{
