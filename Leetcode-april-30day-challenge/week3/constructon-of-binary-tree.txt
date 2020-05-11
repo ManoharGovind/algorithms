@@ -1,0 +1,56 @@
+Construct Binary Search Tree from Preorder Traversal
+Solution
+Return the root node of a binary search tree that matches the given preorder traversal.
+
+(Recall that a binary search tree is a binary tree where for every node, any descendant of node.left has a value < node.val, and any descendant of node.right has a value > node.val.  Also recall that a preorder traversal displays the value of the node first, then traverses node.left, then traverses node.right.)
+
+ 
+
+Example 1:
+
+Input: [8,5,1,7,10,12]
+Output: [8,5,10,1,7,null,12]
+
+ 
+
+Note: 
+
+1 <= preorder.length <= 100
+The values of preorder are distinct.
+
+
+solution:
+class Solution {
+public:
+    TreeNode* getnode(int x){
+        TreeNode* temp;
+        temp=(TreeNode*)malloc(sizeof(TreeNode));
+        temp->val=x;
+        temp->left=NULL;
+        temp->right=NULL;
+        return temp;
+    }
+    TreeNode* add(TreeNode* temp,int x){
+        if(temp==NULL){
+            temp=getnode(x);
+        }
+        else if(x<temp->val){
+            temp->left=add(temp->left,x);
+        }
+        else if(x>temp->val){
+            temp->right=add(temp->right,x);
+        }
+        return temp;
+    }
+    TreeNode* bstFromPreorder(vector<int>& arr) {
+        TreeNode* root=NULL;
+        for(int i=0;i<arr.size();i++){
+            if(i==0){
+                root=add(root,arr[i]);
+            }
+            else
+                add(root,arr[i]);
+        }
+        return root;
+    }
+};

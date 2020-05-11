@@ -1,0 +1,72 @@
+Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+
+Example 1:
+
+Input: S = "ab#c", T = "ad#c"
+Output: true
+Explanation: Both S and T become "ac".
+Example 2:
+
+Input: S = "ab##", T = "c#d#"
+Output: true
+Explanation: Both S and T become "".
+Example 3:
+
+Input: S = "a##c", T = "#a#c"
+Output: true
+Explanation: Both S and T become "c".
+Example 4:
+
+Input: S = "a#c", T = "b"
+Output: false
+Explanation: S becomes "c" while T becomes "b".
+Note:
+
+1 <= S.length <= 200
+1 <= T.length <= 200
+S and T only contain lowercase letters and '#' characters.
+Follow up:
+
+Can you solve it in O(N) time and O(1) space?
+
+
+
+
+SOLUTION:
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        string s1="",s2="";
+        int i;
+        vector<char>vec;
+        for(i=0;i<s.length();i++){
+            if(s[i]=='#' ){
+                if(  vec.size()!=0)
+                vec.pop_back();
+            }
+            else
+                vec.push_back(s[i]);
+        }
+        for(i=0;i<vec.size();i++)
+            s1=s1+vec[i];
+        vec.clear();
+        for(i=0;i<t.length();i++){
+            if(t[i]=='#'){
+                if(vec.size()!=0)
+                vec.pop_back();
+            }
+            else
+                vec.push_back(t[i]);
+        }
+        for(i=0;i<vec.size();i++)
+            s2=s2+vec[i];
+        //cout<<s1<<" "<<s2;
+        if(s1.compare(s2)==0)
+            return true;
+        else
+            return false;
+        
+    }
+};

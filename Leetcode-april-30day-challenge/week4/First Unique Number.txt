@@ -1,0 +1,45 @@
+You have a queue of integers, you need to retrieve the first unique integer in the queue.
+
+Implement the FirstUnique class:
+
+FirstUnique(int[] nums) Initializes the object with the numbers in the queue.
+int showFirstUnique() returns the value of the first unique integer of the queue, and returns -1 if there is no such integer.
+void add(int value) insert value to the queue.
+
+SOLUTION:
+class FirstUnique {
+public:
+    vector<int>v;
+    map<int,int>mp;
+    FirstUnique(vector<int>& nums) {
+        int i;
+        for(i=0;i<nums.size();i++){
+            if(mp[nums[i]]==0){
+                v.push_back(nums[i]);
+            }
+            mp[nums[i]]++;
+        }
+    }
+    
+    int showFirstUnique() {
+        int i;
+        for(i=0;i<v.size();i++){
+            if(mp[v[i]]==1)
+                return v[i];
+        }
+        return -1;
+    }
+    
+    void add(int value) {
+        if(mp[value]==0)
+         v.push_back(value);
+            mp[value]++;
+    }
+};
+
+/**
+ * Your FirstUnique object will be instantiated and called as such:
+ * FirstUnique* obj = new FirstUnique(nums);
+ * int param_1 = obj->showFirstUnique();
+ * obj->add(value);
+ */
